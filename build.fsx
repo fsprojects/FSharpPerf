@@ -11,6 +11,11 @@ open Fake.UserInputHelper
 open System
 open System.IO
 
+
+let runs = 10
+let compilerForkToTest = @"https://github.com/forki/visualfsharp"
+let compilerHashes = ["71c8798e19d6e15d3e6a98c80da658aa5ed2c630"; "1bf329fa06b7e2e4d4ceab545b0e059e72be3e1c"]
+
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
 // --------------------------------------------------------------------------------------
@@ -64,9 +69,6 @@ let release = LoadReleaseNotes "RELEASE_NOTES.md"
 
 let rootDir = "perftests"
 let compilerDir = Path.GetFullPath "./compiler"
-let runs = 10
-let compilerProjectPath = @"D:\code\visualfsharp"
-let compilerHashes = ["71c8798e19d6e15d3e6a98c80da658aa5ed2c630"; "1bf329fa06b7e2e4d4ceab545b0e059e72be3e1c"]
 
 Target "Clean" (fun _ ->
     CleanDirs [ rootDir; compilerDir ]
@@ -102,7 +104,7 @@ Target "RunPerfTests" (fun _ ->
     let allTimings = System.Collections.Generic.List<_>()
     for hash in compilerHashes do
         CleanDirs [ compilerDir ]
-        Repository.clone "" compilerProjectPath compilerDir
+        Repository.clone "" compilerForkToTest compilerDir
         Git.Branches.checkoutNewBranch compilerDir hash "test"
 
         let result = 
