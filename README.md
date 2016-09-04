@@ -24,7 +24,7 @@ At the end you will get a report:
 
 ## Testing on AppVeyor
 
-This project allows you to run compiler performance experiment on AppVeyor. For this do the following:
+This project allows you to run compiler performance experiments on AppVeyor. For this do the following:
 
 * Fork https://github.com/fsprojects/FSharpPerf
 * Make configure your F# compiler fork and the hashes to test in build.fsx
