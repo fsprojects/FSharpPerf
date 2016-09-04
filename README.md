@@ -20,7 +20,7 @@ This will clone the compiler project to ./compiler/ and checkout the first hash.
 
 At the end you will get a report:
 
-
+![Alt text](https://github.com/fsprojects/FSharpPerf/blob/master/docs/files/img/output.png "Report")
 
 ## Maintainer(s)
 
