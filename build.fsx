@@ -108,7 +108,7 @@ Target "RunPerfTests" (fun _ ->
 
         let result = 
             ExecProcess (fun info -> 
-                info.FileName <- Path.Combine(compilerDir,"build.fsx") 
+                info.FileName <- Path.Combine(compilerDir,"build.cmd") 
                 info.WorkingDirectory <- compilerDir) System.TimeSpan.MaxValue
         if result <> 0 then failwithf "Error during build of compiler %s" hash
 
