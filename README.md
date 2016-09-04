@@ -4,8 +4,9 @@ This project contains a set of performance test scripts for the F# compiler.
 
 This script will try to measure compile times of different projects for different versions of the F# compiler.
 
-The idea is that you fork https://github.com/Microsoft/visualfsharp and then make change in the compiler.
-This script will help you to measure performance impact of the change.
+The idea is that you fork https://github.com/Microsoft/visualfsharp and then make changes to the compiler.
+
+This script will help you to measure performance impact of the change by automatically running your compiler fork on well known F# OSS projects.
 
 ## Local Usage
 
@@ -27,7 +28,7 @@ At the end you will get a report:
 This project allows you to run compiler performance experiments on AppVeyor. For this do the following:
 
 * Fork https://github.com/fsprojects/FSharpPerf
-* Make configure your F# compiler fork and the hashes to test in build.fsx
+* Configure your F# compiler fork and the hashes to test in build.fsx
 * Commit the change and send a PR
 
 This will start the test. When it's done you will find the results in AppVeyor's build artifacts.
