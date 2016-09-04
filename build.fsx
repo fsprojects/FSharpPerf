@@ -129,9 +129,10 @@ Target "RunPerfTests" (fun _ ->
 
         allTimings.Add(hash,times)
 
-
+    let log = System.Collections.Generic.List<_>()
+    
     for hash,times in allTimings do
-        tracefn "Compiler: %s" hash
+        log.Add <| sprintf "Compiler: %s" hash
         let timesPerProject =
             times 
             |> Seq.groupBy (fun kv -> kv.Key |> fst)
@@ -139,12 +140,21 @@ Target "RunPerfTests" (fun _ ->
             |> Seq.toList
 
         timesPerProject
-        |> Seq.iter (fun (name,runtime) -> tracefn "   Project: %s %Ams" name (float (runtime / int64 runs)))
+        |> Seq.iter (fun (name,runtime) -> log.Add <| sprintf  "   Project: %s %Ams" name (float (runtime / int64 runs)))
 
         tracefn ""
         timesPerProject
         |> Seq.sumBy (fun (_,runtime) -> runtime)
-        |> fun runtime -> tracefn "   Average Run: %Ams" (float (runtime / int64 runs))
+        |> fun runtime -> log.Add <| sprintf  "   Average Run: %Ams" (float (runtime / int64 runs))
+
+
+    for line in log do
+        tracefn "%s" line
+
+    match buildServer with
+    | AppVeyor -> File.WriteAllLines("TestResults.txt",log)
+    | _ -> ()
+
 )
 
 // --------------------------------------------------------------------------------------
